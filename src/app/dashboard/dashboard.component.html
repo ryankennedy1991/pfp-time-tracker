@@ -1,0 +1,57 @@
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">Time Tracking</h1>
+      <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="printPage()">Print</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="downloadPDF(dateStart+dateEnd)">Export to CVS</button>
+        </div>
+       
+      </div>
+    </div>
+
+    <div class="container form-control">
+    <form (submit)="onClick()" class="">
+        <div class="row">
+            <h3 class="m-1">Custom search:</h3>
+            <div class="col-2 mt-4">
+                <p-floatLabel>
+                    <p-calendar title="dateFrom" id="dateFrom" name="dateFrom" [(ngModel)]="dateFrom" selectionMode="range" dateFormat="dd/mm/yy" [showButtonBar]="true" />
+                    <label for="dateFrom">Choose date range</label>
+                    
+
+                </p-floatLabel>
+            </div>
+            <div class="col-3 mt-4">
+            <p-floatLabel>
+                <p-multiSelect [options]="users" 
+                inputId="float-label" 
+                                name="user"
+                                [(ngModel)]="selectedCities" 
+                                placeholder="Select Users" 
+                                optionLabel="name"
+                                display="chip" 
+                                [showClear]="true" />
+                                <label for="float-label">Select users</label>
+                </p-floatLabel>
+            </div>
+        </div>  
+        <hr>
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary mb-3">Retrieve Time Entries</button>
+            </div>
+        </div>
+
+        
+    </form>
+</div>
+
+
+
+
+    
+    <div class="table-responsive small" >
+        <app-results-table [currentEntries]="entriesByTag()" [currentEntriesByUser]="entriesByUser()"/>
+    </div>
+ 

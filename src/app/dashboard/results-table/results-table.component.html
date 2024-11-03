@@ -1,0 +1,74 @@
+ <div id="pdf-content"> 
+    @if (currentEntries.length > 0) {
+    <h2 class="text-center mt-5">By Client:</h2>
+    <hr>
+    }
+    @for (tag of currentEntries; track $index) {
+        <h3 class="mt-5">{{tag.name | titlecase}}</h3>
+        <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th scope="col" class="col-6">Task</th>
+                <th scope="col" class="col-1">Asignee</th>
+                <th scope="col" class="col-2">Time Started</th>
+                <th scope="col" class="col-2">Time Finished</th>
+                <th scope="col" class="col-1">Duration</th>
+              </tr>
+            </thead>
+            <tbody>
+    
+        @for (entry of tag.entries; track entry.id){
+
+            
+        <tr>
+            <td>{{entry.task.name}}</td>
+            <td>{{entry.user.username}}</td> 
+            <td>{{entry.start | date: "medium"}}</td> 
+            <td>{{entry.end | date: "medium"}}</td>
+            <td>{{entry.duration | time : "full"}}</td>
+        </tr>
+        }
+
+    </tbody>
+  </table>
+  <div class="text-end me-4"><h5>Total time: {{tag.totalTime | time : "full"}}</h5></div>
+  
+}
+
+@if (currentEntries.length > 0) {
+    <h2 class="text-center mt-5">By User:</h2>
+    <hr>
+    }
+    @for (user of currentEntriesByUser; track $index) {
+        <h3 class="mt-5">{{user.name | titlecase}}</h3>
+        <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th scope="col" class="col-6">Task</th>
+                <th scope="col" class="col-1">Asignee</th>
+                <th scope="col" class="col-2">Time Started</th>
+                <th scope="col" class="col-2">Time Finished</th>
+                <th scope="col" class="col-1">Duration</th>
+              </tr>
+            </thead>
+            <tbody>
+    
+        @for (entry of user.entries; track entry.id){
+
+            
+        <tr>
+            <td>{{entry.task.name}}</td>
+            <td>{{entry.user.username}}</td> 
+            <td>{{entry.start | date: "medium"}}</td> 
+            <td>{{entry.end | date: "medium"}}</td>
+            <td>{{entry.duration | time : "full"}}</td>
+        </tr>
+        }
+
+    </tbody>
+  </table>
+  <div class="text-end me-4"><h5>Total time: {{user.totalTime | time : "full"}}</h5></div>
+  
+}
+</div>  
+
